@@ -5,7 +5,7 @@
 	import Loading from '$lib/components/global/Loading.svelte';
 	import Mail from '$lib/components/Icons/Mail.svelte';
 	import Lock from '$lib/components/Icons/Lock.svelte';
-	import { toastStore } from '@skeletonlabs/skeleton';
+	import { Toast, toastStore } from '@skeletonlabs/skeleton';
 	import type { ToastSettings } from '@skeletonlabs/skeleton';
 
 	export let form;
@@ -23,24 +23,24 @@
 		toastStore.trigger(errorToast);
 	}
 
-	//$: console.log("Form: ", form);
+	$: console.log("Form: ", form);
 
 	const successToast: ToastSettings = {
-	message: 'You are now logged in!',
+	message: 'Please check your email for a magic link to login!',
 	autohide: false,
-	background: 'variant-filled-success'
+	background: 'variant-glass-primary'
 	};
 	const errorToast: ToastSettings = {
-	message: 'Error logging in - please try again',
+	message: 'Sorry, something went wrong - please try again',
 	autohide: false,
 	background: 'variant-glass-error'
 	};
 </script>
 
 <section class="w-screen h-full flex-1 sm:flex-row">
-	<div class="w-full sm:w-1/2 h-screen bg-surface-800 flex flex-col items-center justify-center">
+	<div class="w-full sm:w-1/2 h-full bg-surface-800 flex flex-col items-center justify-center">
 		<div class="w-1/2 flex flex-col gap-y-1 items-start">
-			<h1 class="flex justify-start text-4xl text-white font-semibold">Sign In</h1>
+			<h1 class="flex justify-start text-4xl text-white font-semibold">Create an account</h1>
 			<p class="text-surface-400 text-sm ml-1">Get started on your coding journey today!</p>
 		</div>
 		<div class="w-1/2 flex gap-x-3 my-6">
@@ -98,8 +98,8 @@
 				{/if}</button
 			>
 		</form>
-    <div class="w-1/2 flex justify-center items-center mt-5">
-			<p class="text-sm text-white">Don't have an account? <span class="text-primary-400"><a href="/account/signup">Sign Up</a></span></p>
+		<div class="w-1/2 flex justify-center items-center mt-5">
+			<p class="text-sm text-white">Already have an account? <span class="text-primary-400"><a href="/account/signin">Sign In</a></span></p>
 		</div>
 	</div>
 </section>

@@ -1,0 +1,75 @@
+<script lang="ts">
+import { AppShell, AppBar, Toast, toastStore } from '@skeletonlabs/skeleton';
+import { invalidate } from '$app/navigation';
+import { onMount } from 'svelte';
+import { redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
+import type { ToastSettings } from '@skeletonlabs/skeleton';	
+
+export let data;
+
+let { supabase, session } = data;
+$: ({ supabase, session } = data);
+
+onMount(() => {
+  const {
+    data: { subscription }
+  } = supabase.auth.onAuthStateChange((event, _session) => {
+    if (_session?.expires_at !== session?.expires_at) {
+      console.log('Invalidating session');
+      invalidate('supabase:auth');
+    }
+  });
+
+  return () => subscription.unsubscribe();
+});
+
+$: console.log('Session: ', data.session);
+
+const handleSignOut = async () => {
+  const {error} = await supabase.auth.signOut();
+  
+  if (error) {
+    return fail(401, { message: 'Server error. Try again later.', success: false, })
+  }
+  toastStore.trigger(signoutToast);
+  throw redirect(307, '/');
+};
+
+const signoutToast: ToastSettings = {
+message: 'Sign out succesfull!',
+timeout: 3000,
+background: 'variant-glass-primary'
+};
+</script>
+
+<Toast />
+
+<AppShell regionPage="h-screen">
+<svelte:fragment slot="header"
+  ><AppBar slotDefault="flex items-center" slotLead="">
+    <svelte:fragment slot="lead">
+      <div class="w-full flex gap-x-3 items-center">
+        <div class="w-8 h-8 rounded-lg bg-primary-500" />
+        <a href="/" class="text-2xl font font-semibold text-white">Code Journal</a>
+      </div>
+    </svelte:fragment>
+    <svelte:fragment slot="trail">
+      {#if data.session}
+      <button on:click={handleSignOut} class="text-white w-full py-3 btn variant-ringed-primary gap-x-3">Sign out</button>
+      {:else}
+      <a href="/account/signup" class="text-white w-1/2 py-3 btn variant-ringed-primary gap-x-3">Sign Up</a>
+      <a href="/account/signin" class="text-white w-1/2 py-3 btn variant-ringed-primary gap-x-3">Sign In</a>
+      {/if}
+    </svelte:fragment>
+  </AppBar></svelte:fragment
+>
+<!-- (sidebarLeft) -->
+<!-- (sidebarRight) -->
+<!-- (pageHeader) -->
+<!-- Router Slot -->
+<slot />
+<!-- ---- / ---- -->
+<!-- (pageFooter) -->
+<svelte:fragment slot="footer">Footer</svelte:fragment>
+</AppShell>
