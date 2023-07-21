@@ -5,7 +5,7 @@
   import Plus from '$lib/components/Icons/Plus.svelte';
   import Journal from '$lib/components/Icons/Journal.svelte';
   import Graph from '$lib/components/Icons/Graph.svelte';
-  import Account from '$lib/components/Icons/Account.svelte';
+  import Pages from '$lib/components/Icons/Pages.svelte';
   import { onMount } from 'svelte';
   import { redirect } from '@sveltejs/kit';
   import { fail } from '@sveltejs/kit';
@@ -72,17 +72,17 @@
     <AppRail width="w-72" height="h-full">
       <svelte:fragment slot="lead">
         <div class="w-full h-auto flex flex-col gap-y-2 items-center justify-center mt-10">
-          <a href="/dashboard" class="btn variant-soft-primary w-[85%] flex items-center justify-start gap-x-3 text-white"><Home />Home</a>
-          <a href="/dashboard/journal" class="btn variant-soft-primary w-[85%] flex items-center justify-start gap-x-3 text-white"><Journal />Journal</a>
-          <a href="/dashboard" class="btn variant-soft-primary w-[85%] flex items-center justify-start gap-x-3 text-white"><Graph />Statistics</a>
-          <a href="/dashboard" class="btn variant-soft-primary w-[85%] flex items-center justify-start gap-x-3 text-white"><Account />Account</a>
+          <a href="/dashboard" class="btn variant-filled-surface w-[85%] flex items-center justify-start gap-x-3 text-white"><Home />Home</a>
+          <a href="/dashboard/journal" class="btn variant-filled-surface w-[85%] flex items-center justify-start gap-x-3 text-white"><Journal />Journal</a>
+          <a href="/dashboard" class="btn variant-filled-surface w-[85%] flex items-center justify-start gap-x-3 text-white"><Graph />Statistics</a>
+          <a href="/dashboard" class="btn variant-filled-surface w-[85%] flex items-center justify-start gap-x-3 text-white"><Pages />Entries</a>
         </div>
       </svelte:fragment>
       <!-- --- -->
       <!-- --- -->
       <svelte:fragment slot="trail">
         <div class="w-full h-auto flex flex-col gap-y-2 items-center justify-center mb-5">
-          <a href="/dashboard" class="btn variant-soft-primary w-[85%] flex items-center justify-center gap-x-3 text-white"><Plus /></a>
+          <a href="/dashboard" class="btn variant-ghost-primary w-[85%] flex items-center justify-center gap-x-3 text-white"><Plus /></a>
         </div>
       </svelte:fragment>
     </AppRail>
@@ -95,3 +95,9 @@
 	<!-- (pageFooter) -->
 	<!-- (footer) -->
 </AppShell>
+
+<style>
+  p {
+    color: red;
+}
+</style>
