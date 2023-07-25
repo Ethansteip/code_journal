@@ -11,10 +11,6 @@
       element: element,
       extensions: [
         StarterKit,
-        Paragraph.configure({
-      HTMLAttributes: {
-        class: 'my-custom-paragraph',
-      },
       ],
       
       editorProps: {

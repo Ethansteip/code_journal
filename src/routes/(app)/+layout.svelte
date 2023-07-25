@@ -24,7 +24,7 @@ onMount(() => {
   return () => subscription.unsubscribe();
 });
 
-$: console.log('Session: ', data.session);
+//$: console.log('Session: ', data.session);
 
 const handleSignOut = async () => {
   const {error} = await supabase.auth.signOut();
@@ -33,7 +33,6 @@ const handleSignOut = async () => {
     return fail(401, { message: 'Server error. Try again later.', success: false, })
   }
   toastStore.trigger(signoutToast);
-  throw redirect(307, '/');
 };
 
 const signoutToast: ToastSettings = {

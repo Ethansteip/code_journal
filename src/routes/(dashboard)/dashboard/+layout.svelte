@@ -60,11 +60,13 @@
       </div>
     </svelte:fragment>
     <svelte:fragment slot="trail">
-      <Avatar
+      <a href="/dashboard/account">
+        <Avatar
       initials="ES"
         border="border-4 border-surface-300-600-token hover:!border-primary-500 transition duration-200"
         cursor="cursor-pointer"
       />
+      </a>
     </svelte:fragment>
   </AppBar></svelte:fragment
 >
@@ -95,9 +97,3 @@
 	<!-- (pageFooter) -->
 	<!-- (footer) -->
 </AppShell>
-
-<style>
-  p {
-    color: red;
-}
-</style>
